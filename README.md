@@ -14,28 +14,17 @@ This project is a Python Flask-based web app that visualizes airline booking tre
 - Python 3
 - Flask
 - Requests
-- Chart.js (for charts)
 - Tailwind CSS (for UI styling)
 - AviationStack API (free-tier flight data)
 
 ---
 
-## 🚀 Live Features
-
-- Interactive bar charts for:
-  - Routes, Airlines, Cities
-  - Average Price per Route (simulated)
-  - High-Demand Travel Periods
-- Filterable and clean dashboard UI
-- Fast and lightweight Flask API backend
-
----
 
 ## 📦 Setup Instructions
 
 1. Clone this repo:
 ```bash
-git clone https://github.com/YOUR_USERNAME/airline-market-demand-dashboard.git
+git clone https://github.com/saklen077/airline-demand-dashboard.git
 cd airline-market-demand-dashboard
 ```
 
@@ -70,19 +59,3 @@ Then go to: `http://localhost:5000`
 - [AviationStack API](https://aviationstack.com/) - Free-tier airline data
 
 ---
-
-## 📌 Note
-
-The free-tier API does not include actual price data. Price trends are simulated to demonstrate functionality.
-
----
-
-## 🧑‍💻 Author
-
-Saklen Mujawar
-
----
-
-## 📬 Contact
-
-Interested in using or extending this tool? Reach out for collaboration or full-time opportunities.
