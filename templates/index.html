@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Airline Market Demand</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Airline Booking Market Demand Dashboard</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Top 5 Routes</h2>
+        <canvas id="routesChart"></canvas>
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Top 5 Airlines</h2>
+        <canvas id="airlinesChart"></canvas>
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Top 5 Departure Cities</h2>
+        <canvas id="departuresChart"></canvas>
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Top 5 Arrival Cities</h2>
+        <canvas id="arrivalsChart"></canvas>
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Top 5 Travel Dates</h2>
+        <canvas id="datesChart"></canvas>
+      </div>
+      <div>
+  <h2 class="text-xl font-semibold mb-2">Average Price by Route</h2>
+  <canvas id="priceChart"></canvas>
+</div>
+<div>
+  <h2 class="text-xl font-semibold mb-2">High Demand Periods</h2>
+  <canvas id="demandChart"></canvas>
+</div>
+    </div>
+  </div>
+
+  <script>
+    async function loadTrends() {
+      const res = await fetch('/api/trends');
+      const data = await res.json();
+
+      function renderChart(ctxId, labels, values, labelName) {
+        new Chart(document.getElementById(ctxId), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: labelName,
+              data: values,
+              backgroundColor: 'rgba(59,130,246,0.7)',
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      }
+
+      renderChart('routesChart', data.routes.map(r => r[0]), data.routes.map(r => r[1]), 'Routes');
+      renderChart('airlinesChart', data.airlines.map(a => a[0]), data.airlines.map(a => a[1]), 'Airlines');
+      renderChart('departuresChart', data.departures.map(d => d[0]), data.departures.map(d => d[1]), 'Departure Cities');
+      renderChart('arrivalsChart', data.arrivals.map(a => a[0]), data.arrivals.map(a => a[1]), 'Arrival Cities');
+      renderChart('datesChart', data.dates.map(d => d[0]), data.dates.map(d => d[1]), 'Popular Dates');
+      renderChart('priceChart', data.avg_prices.map(p => p[0]), data.avg_prices.map(p => p[1]), 'Avg Price ($)');
+renderChart('demandChart', data.dates.map(d => d[0]), data.dates.map(d => d[1]), 'Flights per Date');
+
+    }
+
+    loadTrends();
+  </script>
+</body>
+</html>
