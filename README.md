@@ -1,3 +1,6 @@
+# Snapshots
+
+![alt text](image.png)
 
 # ✈️ Airline Booking Market Demand Dashboard
 
